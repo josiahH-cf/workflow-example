@@ -1,0 +1,63 @@
+# Feature Lifecycle
+
+This file is the lifecycle index. For execution and validation rules, use:
+
+- `/workflow/PLAYBOOK.md`
+- `/workflow/FILE_CONTRACTS.md`
+- `/workflow/FAILURE_ROUTING.md`
+
+## Project-Level Phases
+
+The project lifecycle follows 8 phases plus a parallel Bug Track. These are one-time or periodic phases that establish the project foundation.
+
+| Phase | Input | Action | Output |
+| ----- | ----- | ------ | ------ |
+| 1. Scaffold Import | Empty/new repo | Run `initialization.md` | Scaffold files placed |
+| 2. Compass | Scaffold in place | Adaptive interview (`/compass`) | `.specify/constitution.md`, AGENTS.md Overview |
+| 3. Define Features | Constitution | Feature interview (`/define-features`) | Feature specs with Compass mapping |
+| 4. Scaffold Project | Feature specs | Architecture reasoning (`/scaffold`) | AGENTS.md Code Conventions + Core Commands |
+| 5. Fine-tune Plan | Architecture plan | Spec + task finalization (`/fine-tune`) | Updated specs + `/tasks/[feature-id]-[slug].md` with task/model/branch mappings |
+| 6. Code | Fine-tuned specs + task files + pre-tests | TDD implementation (`/implement`) | Passing code on feature branches |
+| 7. Test | Feature branch state | `pre` mode: failing tests, `post` mode: AC verification (`/test`) | Test results, bug log entries |
+| 8. Maintain | Shipped features | Documentation + compliance (`/maintain`) | README, CONTRIBUTING, compliance report |
+| Bug Track | Any phase | Bug logging (`/bug`) + fixing (`/bugfix`) | Bug log entries, fix PRs |
+
+Use `/continue` to auto-advance through phases based on exit criteria and persisted orchestrator state in `/workflow/STATE.json`.
+
+## Feature-Level Phases (Per-Feature Lifecycle)
+
+> **Note on phase numbering:** Project-Level Phases (above) run once per project setup. Feature-Level Phases (below) run once per feature, nested within Project Phases 6–7. When `continue.md` refers to "Phase 6", it means the Project-Level Code phase. Inside Phase 6, the Feature-Level cycle (Pre-test → Implement → Post-test → Review → Ship) applies to each feature.
+
+
+Every phase produces a named artifact; the next phase consumes it.
+
+| Phase | Input | Action | Output | Who |
+| ----- | ----- | ------ | ------ | --- |
+| 1. Pre-test | Task file | Write failing tests for ACs | Committed failing tests | Any agent |
+| 2. Implement | Tests + Tasks | TDD implementation (per task) | Passing code on feature branch | Any agent |
+| 3. Post-test | Implementation | Verify all ACs pass | Test results, bug log | Any agent |
+| 4. Review | Branch diff + Spec | Review + optional cross-review | PASS/FAIL report with criterion evidence | Different agent |
+| 5. Ship | Review pass | Create PR, merge | Merged + branch deleted | Human approval |
+
+## Label Conventions
+
+- `status:planned`  -  tasks written, ready to build
+- `status:tests-written`  -  failing tests committed
+- `status:implemented`  -  all tasks complete, tests pass
+- `status:reviewed`  -  cross-agent review passed
+- `status:done`  -  merged
+
+- `size:S` / `size:M` / `size:L`  -  effort estimate
+- `agent:claude` / `agent:codex` / `agent:copilot`  -  assigned agent (optional)
+
+## Bulk Issue Creation
+
+When creating multiple features, write all issues first (labeled `status:idea`), then scope them one at a time. Each issue must be independently actionable; note explicit dependencies in the issue body.
+
+## Feature Identity
+
+- Feature ID format: `[issue-id]-[slug]` (example: `42-user-auth`)
+- Spec and task files must share the same feature ID
+- Criteria IDs in spec: `AC-1..N`
+- Task IDs in tasks file: `T-1..N`
+- Orchestration state file: `/workflow/STATE.json`
