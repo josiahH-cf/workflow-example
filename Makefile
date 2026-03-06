@@ -1,4 +1,4 @@
-CC = x86_64-w64-mingw32-gcc
+CC = i686-w64-mingw32-gcc-posix-FAKE
 CFLAGS = -Wall -Wextra
 SRC = src/main.c
 OUT = build/hello.exe
