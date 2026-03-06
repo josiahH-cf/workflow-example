@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "projectPhase": "7b-review",
+  "projectPhase": "8-maintain",
   "currentFeatureId": "F-001-hello-world",
   "currentTaskFile": "tasks/F-001-hello-world.md",
   "testMode": "post",
   "features": {
     "F-001-hello-world": {
       "spec": "specs/F-001-hello-world.md",
-      "status": "tested",
+      "status": "shipped",
       "priority": 1
     }
   },
