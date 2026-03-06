@@ -47,7 +47,7 @@ echo ""
 echo "--- AC-3 / AC-4: Runtime (Wine) ---"
 if command -v wine > /dev/null 2>&1; then
     if [[ -f "$EXE" ]]; then
-        ACTUAL_OUTPUT="$(wine "$EXE" 2>/dev/null)" || WINE_EXIT=$?
+        ACTUAL_OUTPUT="$(wine "$EXE" 2>/dev/null | tr -d '\r')" || WINE_EXIT=$?
         WINE_EXIT="${WINE_EXIT:-0}"
 
         # AC-3: stdout check
