@@ -1,5 +1,8 @@
 # NOTE: These contents should be appended to the existing file.
 
+# Build artifacts
+build/
+
 # Agent personal overrides
 CLAUDE.local.md
 
